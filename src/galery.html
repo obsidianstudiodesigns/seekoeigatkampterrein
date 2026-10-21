@@ -76,17 +76,7 @@
     </div>
   </section>
 </main>
-<div class="lightbox" role="dialog" aria-modal="true" aria-label="Foto" data-lightbox data-lenis-prevent>
-  <button class="lb-close" type="button" aria-label="Maak toe" data-lb-close>{{icon x}}</button>
-  <div class="lb-stage"><img alt="" data-lb-img></div>
-  <div class="lb-bar">
-    <span data-lb-cap></span>
-    <div class="lb-nav">
-      <button type="button" aria-label="Vorige foto" data-lb-prev>{{icon caret-left}}</button>
-      <button type="button" aria-label="Volgende foto" data-lb-next>{{icon caret-right}}</button>
-    </div>
-  </div>
-</div>
+{{> lightbox}}
 {{> footer}}
 {{> scripts}}
 <script src="assets/js/gallery.js?v={{ver}}" defer></script>

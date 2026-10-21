@@ -9,7 +9,8 @@ Live: https://obsidianstudiodesigns.github.io/seekoeigatkampterrein/
 - `src/` page sources and shared partials (head, nav, footer, scripts)
 - `tools/build.py` builds `src/*.html` into the root pages (responsive images, icons, cache busting)
 - `assets/` CSS, JS, fonts (Cabinet Grotesk, Satoshi), icons (Phosphor sprite), images, brand files
-- Root `*.html` are generated: edit `src/` and run `python tools/build.py`
+- Accommodation pages (`staanplekke.html`, `safari-tente.html`, ...) come from `tools/make_units.py`
+- Root `*.html` are generated: edit `src/` (or `tools/make_units.py`) and run `python tools/make_units.py && python tools/build.py`
 
 ## Features
 

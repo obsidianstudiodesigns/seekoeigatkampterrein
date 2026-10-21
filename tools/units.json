@@ -1,0 +1,37 @@
+[
+ {
+  "slug": "staanplekke",
+  "key": "staanplek",
+  "name": "Staanplekke"
+ },
+ {
+  "slug": "safari-tente",
+  "key": "safari",
+  "name": "Safari-tente"
+ },
+ {
+  "slug": "huisies",
+  "key": "huisie",
+  "name": "Huisies"
+ },
+ {
+  "slug": "boskamp",
+  "key": "boskamp",
+  "name": "Boskamp"
+ },
+ {
+  "slug": "terras",
+  "key": "terras",
+  "name": "Terras by Huisie 3"
+ },
+ {
+  "slug": "wildkamp",
+  "key": "wildkamp",
+  "name": "Wildkamp"
+ },
+ {
+  "slug": "lapa",
+  "key": "lapa",
+  "name": "Lapa en bos troues"
+ }
+]

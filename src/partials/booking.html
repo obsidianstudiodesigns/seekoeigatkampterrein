@@ -1,0 +1,95 @@
+      <div class="book-grid">
+        <form class="form" novalidate data-booking>
+          <div class="field">
+            <label for="b-type">Verblyf</label>
+            <select class="input" id="b-type" name="type">
+              <option value="staanplek">Staanplek vir woonwa of tent</option>
+              <option value="safari">Safari-tent</option>
+              <option value="huisie">Huisie</option>
+              <option value="boskamp">Boskamp</option>
+              <option value="terras">Terras by Huisie 3</option>
+              <option value="wildkamp">Wildkamp (slegs groepe)</option>
+              <option value="pensioen">Pensionarisse</option>
+              <option value="dag">Dagbesoek</option>
+              <option value="lapa">Lapa</option>
+              <option value="groep">Groep, klub of bos troue</option>
+            </select>
+            <span class="hint" data-type-hint></span>
+          </div>
+          <div class="form-row">
+            <div class="field" data-field="arrive">
+              <label for="b-arrive" data-arrive-label>Aankoms</label>
+              <input class="input" type="date" id="b-arrive" name="arrive" required>
+              <span class="err" aria-live="polite"></span>
+            </div>
+            <div class="field" data-field="depart" data-depart-wrap>
+              <label for="b-depart">Vertrek</label>
+              <input class="input" type="date" id="b-depart" name="depart" required>
+              <span class="err" aria-live="polite"></span>
+            </div>
+          </div>
+          <div class="form-row three">
+            <div class="field" data-field="adults">
+              <label for="b-adults">Volwassenes</label>
+              <div class="stepper"><button type="button" aria-label="Minder volwassenes" data-step="-1">{{icon minus}}</button><input id="b-adults" name="adults" type="number" inputmode="numeric" min="1" max="60" value="2"><button type="button" aria-label="Meer volwassenes" data-step="1">{{icon plus}}</button></div>
+              <span class="err" aria-live="polite"></span>
+            </div>
+            <div class="field">
+              <label for="b-kids">Kinders 3 jaar en ouer</label>
+              <div class="stepper"><button type="button" aria-label="Minder kinders" data-step="-1">{{icon minus}}</button><input id="b-kids" name="kids" type="number" inputmode="numeric" min="0" max="40" value="0"><button type="button" aria-label="Meer kinders" data-step="1">{{icon plus}}</button></div>
+            </div>
+            <div class="field">
+              <label for="b-babies">Kinders onder 3</label>
+              <div class="stepper"><button type="button" aria-label="Minder babas" data-step="-1">{{icon minus}}</button><input id="b-babies" name="babies" type="number" inputmode="numeric" min="0" max="20" value="0"><button type="button" aria-label="Meer babas" data-step="1">{{icon plus}}</button></div>
+            </div>
+          </div>
+          <div class="field" data-vehicles-wrap>
+            <label for="b-vehicles">Ekstra voertuie</label>
+            <div class="stepper" style="max-width:220px"><button type="button" aria-label="Minder voertuie" data-step="-1">{{icon minus}}</button><input id="b-vehicles" name="vehicles" type="number" inputmode="numeric" min="0" max="6" value="0"><button type="button" aria-label="Meer voertuie" data-step="1">{{icon plus}}</button></div>
+            <span class="hint">Een voertuig is ingesluit. R30 per ekstra voertuig per nag.</span>
+          </div>
+          <div class="form-row">
+            <div class="field" data-field="name">
+              <label for="b-name">Naam en van</label>
+              <input class="input" id="b-name" name="name" autocomplete="name" placeholder="Bv. Johan van Wyk" required>
+              <span class="err" aria-live="polite"></span>
+            </div>
+            <div class="field" data-field="phone">
+              <label for="b-phone">Selfoon</label>
+              <input class="input" id="b-phone" name="phone" type="tel" autocomplete="tel" placeholder="Bv. 082 555 0147" required>
+              <span class="err" aria-live="polite"></span>
+            </div>
+          </div>
+          <div class="field" data-field="email">
+            <label for="b-email">E-pos <span class="hint">(opsioneel)</span></label>
+            <input class="input" id="b-email" name="email" type="email" autocomplete="email" placeholder="jou@epos.co.za">
+            <span class="err" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="b-notes">Enigiets anders?</label>
+            <textarea class="input" id="b-notes" name="notes" placeholder="Bv. staanplek naby die rivier, grootte van woonwa, aantal tente"></textarea>
+          </div>
+          <div class="form-status" role="status" data-status></div>
+          <div class="form-actions">
+            <button class="btn btn-wa" type="submit" data-send="wa">{{icon whatsapp-logo}}Stuur via WhatsApp</button>
+            <button class="btn btn-ghost" type="submit" data-send="mail">{{icon envelope-simple}}Stuur via e-pos</button>
+          </div>
+          <p class="form-note">Jou bespreking is eers bevestig wanneer ons terugkom na jou. 'n Deposito van 50% is betaalbaar binne 2 weke. Lees ons <a href="privaatheid.html">privaatheidsbeleid</a>.</p>
+        </form>
+        <aside class="summary" aria-live="polite" data-summary>
+          <h3>Jou opsomming</h3>
+          <dl>
+            <div><dt>Verblyf</dt><dd data-s="type">Staanplek</dd></div>
+            <div><dt>Datums</dt><dd data-s="dates">Kies datums</dd></div>
+            <div><dt>Tydsduur</dt><dd data-s="length">-</dd></div>
+            <div><dt>Persone</dt><dd data-s="people">2</dd></div>
+          </dl>
+          <div class="total"><span>Geskatte koste</span><b data-s="total">-</b></div>
+          <p class="small" data-s="note">'n Skatting volgens die 2026/27 tariewe. Die kantoor bevestig die finale bedrag.</p>
+          <div class="contact-alt">
+            <span>Verkies om te bel?</span>
+            <a href="tel:+27603514738">060 351 4738</a>
+            <a href="mailto:seekoeigatkameeldoorn@gmail.com">seekoeigatkameeldoorn@gmail.com</a>
+          </div>
+        </aside>
+      </div>

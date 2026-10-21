@@ -1,0 +1,23 @@
+<!-- @meta {"title": "Bespreek | Seekoeigat Kampterrein", "desc": "Bespreek jou staanplek, safari-tent, huisie of die lapa by Seekoeigat Kampterrein. Kry 'n geskatte koste en stuur jou navraag direk via WhatsApp of e-pos.", "path": "bespreek.html"} -->
+{{> head}}
+<body>
+{{> nav}}
+<main id="inhoud">
+  <section class="page-hero book-hero">
+    {{img river-dusk|Sononder oor die Olifantsrivier by Seekoeigat|100vw||eager}}
+    <div class="wrap">
+      <h1>Bespreek jou plek.</h1>
+      <p>Kies jou verblyf en datums, sien die geskatte koste, en stuur dit direk via WhatsApp of e-pos. Ons bevestig beskikbaarheid en stuur die bankbesonderhede vir die deposito.</p>
+    </div>
+  </section>
+  <section class="section book" id="bespreek" aria-label="Besprekingsvorm" style="padding-top: clamp(40px, 6vw, 72px)">
+    <div class="wrap">
+{{> booking}}
+    </div>
+  </section>
+</main>
+{{> footer}}
+{{> scripts}}
+<script src="assets/js/booking.js?v={{ver}}" defer></script>
+</body>
+</html>

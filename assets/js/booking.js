@@ -83,6 +83,10 @@
       : r.quote ? 'Ons stuur vir jou \'n kwotasie na jou navraag.' : '\'n Skatting volgens die 2026/27 tariewe. Die kantoor bevestig die finale bedrag.';
   }
 
+  // preselect from links like bespreek.html?verblyf=huisie
+  const pre = new URLSearchParams(location.search).get('verblyf');
+  if (pre && RATES[pre]) type.value = pre;
+
   form.addEventListener('input', render);
   form.addEventListener('change', render);
   render();
