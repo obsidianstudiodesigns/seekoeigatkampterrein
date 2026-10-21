@@ -285,7 +285,7 @@
       const dist = () => Math.max(0, track.scrollWidth - innerWidth);
       const tween = gsap.to(track, {
         x: () => -dist(), ease: 'none',
-        scrollTrigger: { trigger: stays, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1 },
+        scrollTrigger: { trigger: stays, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1, onToggle: (st) => document.body.classList.toggle('in-stays', st.isActive) },
       });
       panST = tween.scrollTrigger;
       $$('.stay-media img', track).forEach((img) => {
