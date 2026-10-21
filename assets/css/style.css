@@ -589,3 +589,8 @@ a.stay-media { display: block; color: inherit; }
   .unit-facts { grid-template-columns: 1fr; }
   .others { grid-auto-columns: 72vw; }
 }
+
+/* Long words (e-mail addresses, account numbers) may wrap instead of widening the page on phones */
+.panel, .rate-group, .unit-card, .unit-copy, .summary, .form, .loc-info, .legal, .callout, .rules, .book-grid > *, .info-grid > *, .unit-grid > * { min-width: 0; }
+.panel, .legal, .loc-item, .summary, .callout, .rules, .unit-text, .form-note, .unit-card { overflow-wrap: anywhere; }
+.bank div { flex-wrap: wrap; }
