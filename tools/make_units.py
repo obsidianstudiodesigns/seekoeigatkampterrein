@@ -56,10 +56,10 @@ UNITS = [
         "price": "R560", "per": "per nag vir 2 persone",
         "desc": [
             "Die huisies is gebou van klip met grasdakke, tussen die bome naby die rivier. Elkeen het 'n oop stoep met 'n kombuisbank, tafel en stoele, en 'n eie braai-area.",
-            "Binne is daar twee driekwartbeddens, ingebou in klip. Tot vier persone kan die beddens deel. Die huisies is selfsorg, met gedeelde ablusie naby. Huisie 3 kan saam met die terras bespreek word vir 'n groter familie.",
+            "Die huisies is net vir 2 persone. Binne is daar twee driekwartbeddens (3/4-bed), ingebou in klip, en 'n klein yskas. Maksimum 4 persone kan bly indien julle 'n bed wil deel. Die huisies is selfsorg, met gedeelde ablusie naby. Huisie 3 kan saam met die terras bespreek word vir 'n groter familie.",
         ],
-        "facts": [("users", "2 persone ingesluit"), ("plus", "R120 per ekstra persoon"), ("users", "Maksimum 4 persone"),
-                  ("house-line", "Twee driekwartbeddens"), ("fire", "Eie braai-area"), ("info", "Selfsorg, gedeelde ablusie")],
+        "facts": [("users", "Net vir 2 persone"), ("users", "Maks 4 persone indien julle 'n bed deel"), ("plus", "R120 per ekstra persoon"),
+                  ("house-line", "Twee 3/4-beddens"), ("snowflake", "Klein yskas"), ("fire", "Eie braai-area"), ("info", "Selfsorg, gedeelde ablusie")],
         "photos": [("u-huisie-01", "Huisie 3 se stoep met kombuisbank, tafel en stoele"), ("u-huisie-02", "Binne 'n huisie met twee beddens van klip"),
                    ("u-huisie-03", "Huisie met grasdak en stoep"), ("u-huisie-04", "Braai-area met uitsig oor die rivier"),
                    ("u-huisie-05", "Stoep en braai-area van 'n huisie"), ("u-huisie-06", "Binne 'n huisie met klipmure en 'n venster"),

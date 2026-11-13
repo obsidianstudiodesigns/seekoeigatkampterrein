@@ -36,7 +36,7 @@
 
   <link rel="preload" href="assets/fonts/cabinetgrotesk-800-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/satoshi-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=202610211206">
+  <link rel="stylesheet" href="assets/css/style.css?v=202611130706">
   <script>(function(d){var m=!matchMedia('(prefers-reduced-motion: reduce)').matches;d.classList.toggle('js-motion',m);if(m)setTimeout(function(){if(!window.__motionReady)d.classList.remove('js-motion')},4000)})(document.documentElement);</script>
 </head>
 
@@ -92,22 +92,22 @@
     <div class="wrap">
       <div class="book-grid">
         <form class="form" novalidate data-booking>
-          <div class="field">
-            <label for="b-type">Verblyf</label>
-            <select class="input" id="b-type" name="type">
-              <option value="staanplek">Staanplek vir woonwa of tent</option>
-              <option value="safari">Safari-tent</option>
-              <option value="huisie">Huisie</option>
-              <option value="boskamp">Boskamp</option>
-              <option value="terras">Terras by Huisie 3</option>
-              <option value="wildkamp">Wildkamp (slegs groepe)</option>
-              <option value="pensioen">Pensionarisse</option>
-              <option value="dag">Dagbesoek</option>
-              <option value="lapa">Lapa</option>
-              <option value="groep">Groep, klub of bos troue</option>
-            </select>
-            <span class="hint" data-type-hint></span>
-          </div>
+          <fieldset class="field picks-field" data-field="stays">
+            <legend>Verblyf <span class="hint">Kies een of meer</span></legend>
+            <div class="picks">
+              <label class="pick"><input type="checkbox" name="stay" value="staanplek"><span class="pick-box"><span class="pick-check"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#check"></use></svg></span><b>Staanplek</b><small>Woonwa of tent, R480 / nag</small></span></label>
+              <label class="pick"><input type="checkbox" name="stay" value="safari"><span class="pick-box"><span class="pick-check"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#check"></use></svg></span><b>Safari-tent</b><small>2 persone, R500 / nag</small></span></label>
+              <label class="pick"><input type="checkbox" name="stay" value="huisie"><span class="pick-box"><span class="pick-check"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#check"></use></svg></span><b>Huisie</b><small>2 persone, R560 / nag</small></span></label>
+              <label class="pick"><input type="checkbox" name="stay" value="boskamp"><span class="pick-box"><span class="pick-check"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#check"></use></svg></span><b>Boskamp</b><small>4 persone, R500 / nag</small></span></label>
+              <label class="pick"><input type="checkbox" name="stay" value="terras"><span class="pick-box"><span class="pick-check"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#check"></use></svg></span><b>Terras by Huisie 3</b><small>4 persone, R480 / nag</small></span></label>
+              <label class="pick"><input type="checkbox" name="stay" value="wildkamp"><span class="pick-box"><span class="pick-check"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#check"></use></svg></span><b>Wildkamp</b><small>Slegs groepe, R480 / nag</small></span></label>
+              <label class="pick"><input type="checkbox" name="stay" value="pensioen"><span class="pick-box"><span class="pick-check"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#check"></use></svg></span><b>Pensionarisse</b><small>2 persone, R350 / nag</small></span></label>
+              <label class="pick"><input type="checkbox" name="stay" value="lapa"><span class="pick-box"><span class="pick-check"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#check"></use></svg></span><b>Lapa</b><small>20 gaste, R1&nbsp;800 / dag</small></span></label>
+              <label class="pick"><input type="checkbox" name="stay" value="dag"><span class="pick-box"><span class="pick-check"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#check"></use></svg></span><b>Dagbesoek</b><small>R150 per persoon</small></span></label>
+              <label class="pick"><input type="checkbox" name="stay" value="groep"><span class="pick-box"><span class="pick-check"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#check"></use></svg></span><b>Groep of bos troue</b><small>Op kwotasie</small></span></label>
+            </div>
+            <span class="err" aria-live="polite"></span>
+          </fieldset>
           <div class="form-row">
             <div class="field" data-field="arrive">
               <label for="b-arrive" data-arrive-label>Aankoms</label>
@@ -120,25 +120,12 @@
               <span class="err" aria-live="polite"></span>
             </div>
           </div>
-          <div class="form-row three">
-            <div class="field" data-field="adults">
-              <label for="b-adults">Volwassenes</label>
-              <div class="stepper"><button type="button" aria-label="Minder volwassenes" data-step="-1"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#minus"></use></svg></button><input id="b-adults" name="adults" type="number" inputmode="numeric" min="1" max="60" value="2"><button type="button" aria-label="Meer volwassenes" data-step="1"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#plus"></use></svg></button></div>
-              <span class="err" aria-live="polite"></span>
-            </div>
-            <div class="field">
-              <label for="b-kids">Kinders 3 jaar en ouer</label>
-              <div class="stepper"><button type="button" aria-label="Minder kinders" data-step="-1"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#minus"></use></svg></button><input id="b-kids" name="kids" type="number" inputmode="numeric" min="0" max="40" value="0"><button type="button" aria-label="Meer kinders" data-step="1"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#plus"></use></svg></button></div>
-            </div>
-            <div class="field">
-              <label for="b-babies">Kinders onder 3</label>
-              <div class="stepper"><button type="button" aria-label="Minder babas" data-step="-1"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#minus"></use></svg></button><input id="b-babies" name="babies" type="number" inputmode="numeric" min="0" max="20" value="0"><button type="button" aria-label="Meer babas" data-step="1"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#plus"></use></svg></button></div>
-            </div>
+          <div class="stay-rows" data-stay-rows>
+            <p class="stay-empty">Kies hierbo watter verblyf jy wil bespreek. Jy kan meer as een kies, byvoorbeeld 'n huisie vir ouma en oupa en 'n staanplek vir die res van die familie.</p>
           </div>
-          <div class="field" data-vehicles-wrap>
-            <label for="b-vehicles">Ekstra voertuie</label>
-            <div class="stepper" style="max-width:220px"><button type="button" aria-label="Minder voertuie" data-step="-1"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#minus"></use></svg></button><input id="b-vehicles" name="vehicles" type="number" inputmode="numeric" min="0" max="6" value="0"><button type="button" aria-label="Meer voertuie" data-step="1"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#plus"></use></svg></button></div>
-            <span class="hint">Een voertuig is ingesluit. R30 per ekstra voertuig per nag.</span>
+          <div class="field">
+            <label for="b-babies">Kinders onder 3 <span class="hint">(gratis)</span></label>
+            <div class="stepper" style="max-width:220px"><button type="button" aria-label="Minder kinders onder 3" data-step="-1"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#minus"></use></svg></button><input id="b-babies" name="babies" type="number" inputmode="numeric" min="0" max="20" value="0"><button type="button" aria-label="Meer kinders onder 3" data-step="1"><svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#plus"></use></svg></button></div>
           </div>
           <div class="form-row">
             <div class="field" data-field="name">
@@ -159,7 +146,7 @@
           </div>
           <div class="field">
             <label for="b-notes">Enigiets anders?</label>
-            <textarea class="input" id="b-notes" name="notes" placeholder="Bv. staanplek naby die rivier, grootte van woonwa, aantal tente"></textarea>
+            <textarea class="input" id="b-notes" name="notes" placeholder="Bv. staanplekke langs mekaar, grootte van woonwa, aantal tente"></textarea>
           </div>
           <div class="form-status" role="status" data-status></div>
           <div class="form-actions">
@@ -171,12 +158,11 @@
         <aside class="summary" aria-live="polite" data-summary>
           <h3>Jou opsomming</h3>
           <dl>
-            <div><dt>Verblyf</dt><dd data-s="type">Staanplek</dd></div>
             <div><dt>Datums</dt><dd data-s="dates">Kies datums</dd></div>
             <div><dt>Tydsduur</dt><dd data-s="length">-</dd></div>
-            <div><dt>Persone</dt><dd data-s="people">2</dd></div>
           </dl>
-          <div class="total"><span>Geskatte koste</span><b data-s="total">-</b></div>
+          <ul class="sum-lines" data-s="lines"><li class="sum-empty">Nog geen verblyf gekies nie</li></ul>
+          <div class="total"><span>Geskatte totaal</span><b data-s="total">-</b></div>
           <p class="small" data-s="note">'n Skatting volgens die 2026/27 tariewe. Die kantoor bevestig die finale bedrag.</p>
           <div class="contact-alt">
             <span>Verkies om te bel?</span>
@@ -247,8 +233,8 @@
 <script src="assets/js/vendor/gsap.min.js" defer></script>
 <script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/vendor/lenis.min.js" defer></script>
-<script src="assets/js/main.js?v=202610211206" defer></script>
+<script src="assets/js/main.js?v=202611130706" defer></script>
 
-<script src="assets/js/booking.js?v=202610211206" defer></script>
+<script src="assets/js/booking.js?v=202611130706" defer></script>
 </body>
 </html>

@@ -374,6 +374,11 @@
     document.addEventListener('visibilitychange', () => { if (!document.hidden && visible) start(); });
   }
 
+  /* Aerial band: the photo drifts slower than the page */
+  if (motion && $('[data-vista]')) {
+    gsap.fromTo('[data-vista] .vista-media', { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '[data-vista]', start: 'top bottom', end: 'bottom top', scrub: true } });
+  }
+
   /* Fire section: slow push on scroll */
   if (motion && $('[data-fire]')) {
     gsap.fromTo('[data-fire] .fire-media img', { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-fire]', start: 'top bottom', end: 'bottom top', scrub: true } });
