@@ -14,7 +14,7 @@ import json, os, re, sys, datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "src")
 MANIFEST = json.load(open(os.path.join(ROOT, "tools", "images.json"), encoding="utf-8"))
-BASE = "https://obsidianstudiodesigns.github.io/seekoeigatkampterrein/"
+BASE = "https://www.seekoeigat.co.za/"
 
 DEFAULTS = {
     "base": BASE,

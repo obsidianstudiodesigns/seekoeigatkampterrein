@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://obsidianstudiodesigns.github.io/seekoeigatkampterrein/sitemap.xml
+Sitemap: https://www.seekoeigat.co.za/sitemap.xml

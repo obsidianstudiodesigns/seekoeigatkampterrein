@@ -2,7 +2,7 @@
 
 Website for Seekoeigat Kampterrein, a private caravan park on the Olifants River near Groblersdal (13 km from Loskop Dam).
 
-Live: https://obsidianstudiodesigns.github.io/seekoeigatkampterrein/
+Live: https://www.seekoeigat.co.za/
 
 ## Structure
 
