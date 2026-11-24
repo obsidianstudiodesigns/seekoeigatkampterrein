@@ -245,7 +245,7 @@ def stand_picker():
             pair = [m for m in st["nums"] if m != n]
             note = f'<small>Deel die foto met staanplek {pair[0]}</small>' if pair else ""
             cards.append(f'''        <article class="stand" data-stand="{n}">
-          <div class="stand-media">{{{{img {st["img"]}|Staanplek {n} op die gras by die Olifantsrivier|(max-width: 560px) 50vw, (max-width: 960px) 33vw, 22vw}}}}</div>
+          <div class="stand-media" data-lb-item data-caption="Staanplek {n}" aria-label="Sien staanplek {n} groter">{{{{img {st["img"]}|Staanplek {n} op die gras by die Olifantsrivier|(max-width: 560px) 50vw, (max-width: 960px) 33vw, 22vw}}}}<span class="zoom-hint" aria-hidden="true">{{{{icon magnifying-glass-plus}}}}</span></div>
           <div class="stand-body">
             <h3>Staanplek {n}</h3>{note}
             <div class="stand-actions">
@@ -260,7 +260,7 @@ def stand_picker():
         <h2 id="stands-title" data-reveal>Kies jou staanplek.</h2>
         <p class="lead" data-reveal>Al 28 staanplekke, elkeen met 'n foto. Bespreek een direk, of kies 'n paar en bespreek hulle saam. Die kantoor bevestig of jou keuse beskikbaar is.</p>
       </div>
-      <div class="stands-grid">
+      <div class="stands-grid" data-gallery>
 {chr(10).join(cards)}
       </div>
     </div>

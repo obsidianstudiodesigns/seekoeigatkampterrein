@@ -1,39 +1,46 @@
-/* Gallery: category filter and lightbox */
+/* Galleries: category filter and a shared lightbox.
+   Every [data-gallery] on the page is its own set; items are <figure>s or elements marked [data-lb-item].
+   The caption comes from the figcaption, then data-caption, then the image's alt text. */
 (() => {
-  const grid = document.querySelector('[data-gallery]');
-  if (!grid) return;
-  const figs = Array.from(grid.querySelectorAll('figure'));
-  const chips = Array.from(document.querySelectorAll('[data-filter]'));
+  const grids = Array.from(document.querySelectorAll('[data-gallery]'));
   const lb = document.querySelector('[data-lightbox]');
+  if (!grids.length || !lb) return;
   const lbImg = lb.querySelector('[data-lb-img]');
   const lbCap = lb.querySelector('[data-lb-cap]');
-  let list = figs, index = 0, lastFocus = null;
+  const sets = grids.map((g) => Array.from(g.querySelectorAll('figure, [data-lb-item]')));
+  let list = [], index = 0, lastFocus = null;
 
   // largest source from the srcset
-  const full = (fig) => {
-    const img = fig.querySelector('img');
+  const full = (item) => {
+    const img = item.querySelector('img');
     const parts = img.srcset.split(',').map((s) => s.trim().split(' ')[0]);
     return parts[Math.min(parts.length - 1, 1)] || img.src;
   };
+  const caption = (item) => {
+    const fc = item.querySelector('figcaption');
+    return (fc && fc.textContent) || item.dataset.caption || item.querySelector('img').alt;
+  };
 
+  // category filter (gallery page)
+  const chips = Array.from(document.querySelectorAll('[data-filter]'));
   chips.forEach((chip) => chip.addEventListener('click', () => {
     const f = chip.dataset.filter;
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-    figs.forEach((fig) => { fig.hidden = f !== 'alles' && fig.dataset.cat !== f; });
-    list = figs.filter((fig) => !fig.hidden);
+    sets[0].forEach((it) => { it.hidden = f !== 'alles' && it.dataset.cat !== f; });
     if (window.ScrollTrigger) ScrollTrigger.refresh();
   }));
 
   const show = (i) => {
     index = (i + list.length) % list.length;
-    const fig = list[index];
-    lbImg.src = full(fig);
-    lbImg.alt = fig.querySelector('img').alt;
-    lbCap.textContent = `${fig.querySelector('figcaption').textContent}  (${index + 1} van ${list.length})`;
+    const item = list[index];
+    lbImg.src = full(item);
+    lbImg.alt = item.querySelector('img').alt;
+    lbCap.textContent = `${caption(item)}  (${index + 1} van ${list.length})`;
   };
-  const open = (fig) => {
+  const open = (item, set) => {
     lastFocus = document.activeElement;
-    show(list.indexOf(fig));
+    list = set.filter((it) => !it.hidden);
+    show(list.indexOf(item));
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
     lb.querySelector('[data-lb-close]').focus();
@@ -44,10 +51,12 @@
     if (lastFocus) lastFocus.focus();
   };
 
-  figs.forEach((fig) => {
-    fig.addEventListener('click', () => open(fig));
-    fig.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(fig); } });
-  });
+  sets.forEach((set) => set.forEach((item) => {
+    if (!item.hasAttribute('tabindex')) item.tabIndex = 0;
+    if (!item.hasAttribute('role') && item.tagName !== 'FIGURE') item.setAttribute('role', 'button');
+    item.addEventListener('click', () => open(item, set));
+    item.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(item, set); } });
+  }));
   lb.querySelector('[data-lb-close]').addEventListener('click', close);
   lb.querySelector('[data-lb-prev]').addEventListener('click', () => show(index - 1));
   lb.querySelector('[data-lb-next]').addEventListener('click', () => show(index + 1));

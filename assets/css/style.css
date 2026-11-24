@@ -705,3 +705,10 @@ body:has(.stand-bar:not([hidden])) .wa-float { transform: translateY(120px); }
 .stand-chip { height: 40px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--surface); font-weight: 700; font-size: .92rem; cursor: pointer; transition: background-color .2s, border-color .2s, color .2s; }
 .stand-chip:hover { border-color: var(--ink); }
 .stand-chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+/* Clickable stand photos */
+.stand-media { position: relative; cursor: zoom-in; }
+.stand-media:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 0; }
+.zoom-hint { position: absolute; right: 10px; bottom: 10px; width: 38px; height: 38px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; color: var(--bone); background: rgba(14, 22, 16, .45); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); opacity: .85; transition: opacity .3s, transform .4s var(--ease); pointer-events: none; }
+.zoom-hint .icon { width: 20px; height: 20px; }
+.stand:hover .zoom-hint { opacity: 1; transform: scale(1.08); }
