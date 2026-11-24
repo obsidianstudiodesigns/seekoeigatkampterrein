@@ -161,6 +161,9 @@ def page(u):
         "path": f'{u["slug"]}.html',
     }
     book = f'bespreek.html?verblyf={u["key"]}'
+    stands_html, stands_js = "", ""
+    if u["slug"] == "staanplekke":
+        stands_html, stands_js = stand_picker(), '<script src="assets/js/stands.js?v={{ver}}" defer></script>\n'
     return f'''<!-- @meta {json.dumps(meta, ensure_ascii=False)} -->
 {{{{> head}}}}
 <body>
@@ -200,7 +203,7 @@ def page(u):
     </div>
   </section>
 
-  <section class="section unit-photos" id="fotos" aria-labelledby="fotos-title">
+{stands_html}  <section class="section unit-photos" id="fotos" aria-labelledby="fotos-title">
     <div class="wrap">
       <div class="strip-head">
         <h2 id="fotos-title" data-reveal>Kyk rond.</h2>
@@ -228,8 +231,46 @@ def page(u):
 {{{{> footer}}}}
 {{{{> scripts}}}}
 <script src="assets/js/gallery.js?v={{{{ver}}}}" defer></script>
-</body>
+{stands_js}</body>
 </html>
+'''
+
+
+def stand_picker():
+    """Grid of every numbered stand from the old site's photos; each one is bookable on its own."""
+    stands = json.load(open(os.path.join(ROOT, "tools", "stands.json"), encoding="utf-8"))
+    cards = []
+    for st in stands:
+        for n in st["nums"]:
+            pair = [m for m in st["nums"] if m != n]
+            note = f'<small>Deel die foto met staanplek {pair[0]}</small>' if pair else ""
+            cards.append(f'''        <article class="stand" data-stand="{n}">
+          <div class="stand-media">{{{{img {st["img"]}|Staanplek {n} op die gras by die Olifantsrivier|(max-width: 560px) 50vw, (max-width: 960px) 33vw, 22vw}}}}</div>
+          <div class="stand-body">
+            <h3>Staanplek {n}</h3>{note}
+            <div class="stand-actions">
+              <button type="button" class="stand-pick" aria-pressed="false" data-pick="{n}">{{{{icon plus}}}}<span>Kies</span></button>
+              <a class="btn btn-primary btn-sm" href="bespreek.html?verblyf=staanplek&amp;plek={n}">Bespreek</a>
+            </div>
+          </div>
+        </article>''')
+    return f'''  <section class="section stands-section" id="staanplekke" aria-labelledby="stands-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="stands-title" data-reveal>Kies jou staanplek.</h2>
+        <p class="lead" data-reveal>Al 28 staanplekke, elkeen met 'n foto. Bespreek een direk, of kies 'n paar en bespreek hulle saam. Die kantoor bevestig of jou keuse beskikbaar is.</p>
+      </div>
+      <div class="stands-grid">
+{chr(10).join(cards)}
+      </div>
+    </div>
+    <div class="stand-bar" data-stand-bar hidden>
+      <span data-stand-count>0 staanplekke gekies</span>
+      <button type="button" class="btn btn-ghost btn-sm" data-stand-clear>Maak skoon</button>
+      <a class="btn btn-primary btn-sm" href="bespreek.html?verblyf=staanplek" data-stand-book>Bespreek gekose{{{{icon arrow-right}}}}</a>
+    </div>
+  </section>
+
 '''
 
 

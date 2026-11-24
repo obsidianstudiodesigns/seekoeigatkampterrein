@@ -45,6 +45,9 @@
   // per-stay numbers survive unticking and re-ticking
   const state = {};
   ORDER.forEach((k) => (state[k] = { units: 1, adults: RATES[k].adults, kids: 0, vehicles: 0, days: 1 }));
+  state.staanplek.stands = []; // preferred stand numbers, 1 to 28
+  const STANDS = 28;
+  const standList = () => state.staanplek.stands.slice().sort((a, b) => a - b);
   const selected = () => boxes.filter((b) => b.checked).map((b) => b.value);
   const onlyDay = () => { const s = selected(); return s.length > 0 && s.every((k) => RATES[k].day); };
 
@@ -80,6 +83,7 @@
             <button type="button" class="stay-remove" data-remove="${k}" aria-label="Verwyder ${r.label}">${icon('x')}</button>
           </header>
           <div class="stay-row-fields">${fields.join('')}</div>
+          ${k === 'staanplek' ? `<div class="stand-chips-wrap"><span class="stand-chips-label">Watter staanplekke? <span class="hint">Opsioneel. <a href="staanplekke.html#staanplekke" target="_blank" rel="noopener">Sien foto's van elke staanplek</a></span></span><div class="stand-chips">${Array.from({ length: STANDS }, (_, i) => i + 1).map((n) => `<button type="button" class="stand-chip" data-chip="${n}" aria-pressed="${state.staanplek.stands.includes(n)}" aria-label="Staanplek ${n}">${n}</button>`).join('')}</div></div>` : ''}
           <p class="hint">${r.hint}${r.vehicles ? ' Een voertuig per eenheid ingesluit, R30 per ekstra voertuig per nag.' : ''}</p>
           <p class="stay-warn" data-warn="${k}" hidden></p>
         </section>`;
@@ -88,7 +92,7 @@
 
   function calcStay(k, nights) {
     const r = RATES[k], s = state[k];
-    const units = r.single ? 1 : num(s.units, 1);
+    const units = r.single ? 1 : k === 'staanplek' && s.stands.length ? s.stands.length : num(s.units, 1);
     const people = num(s.adults) + num(s.kids);
     let total = null;
     if (r.quote) total = null;
@@ -125,7 +129,7 @@
         warn.hidden = !c.over;
         if (c.over) warn.textContent = `Maksimum ${c.r.max} persone per eenheid. Kies nog ${c.r.unit || 'eenhede'} of minder persone.`;
       }
-      const qty = c.r.single ? '' : ` x${c.units}`;
+      const qty = (c.r.single ? '' : ` x${c.units}`) + (k === 'staanplek' && c.s.stands.length ? ` (nr ${standList().join(', ')})` : '');
       return `<li><span>${c.r.label}${qty}<small>${c.people} ${c.people === 1 ? 'persoon' : 'persone'}</small></span><b>${sub}</b></li>`;
     });
     const b = num(babies.value);
@@ -140,6 +144,20 @@
   // ticking and unticking stays
   boxes.forEach((b) => b.addEventListener('change', () => { renderRows(); render(); setErr('stays'); }));
   rows.addEventListener('click', (e) => {
+    const chip = e.target.closest('[data-chip]');
+    if (chip) {
+      const n = +chip.dataset.chip, list = state.staanplek.stands;
+      const i = list.indexOf(n);
+      i >= 0 ? list.splice(i, 1) : list.push(n);
+      chip.setAttribute('aria-pressed', String(i < 0));
+      if (list.length) {
+        state.staanplek.units = list.length;
+        const u = rows.querySelector('[data-stay="staanplek"][data-k="units"]');
+        if (u) u.value = list.length;
+      }
+      render();
+      return;
+    }
     const rm = e.target.closest('[data-remove]');
     if (rm) { boxes.find((b) => b.value === rm.dataset.remove).checked = false; renderRows(); render(); }
   });
@@ -163,6 +181,13 @@
   // preselect from links like bespreek.html?verblyf=huisie or ?verblyf=huisie,staanplek
   const pre = (new URLSearchParams(location.search).get('verblyf') || '').split(',');
   boxes.forEach((b) => { if (pre.includes(b.value)) b.checked = true; });
+  // ?plek=3,7,12 picks specific stand numbers
+  const plek = (new URLSearchParams(location.search).get('plek') || '').split(',').map(Number).filter((n) => n >= 1 && n <= STANDS);
+  if (plek.length) {
+    state.staanplek.stands = [...new Set(plek)];
+    state.staanplek.units = state.staanplek.stands.length;
+    boxes.find((b) => b.value === 'staanplek').checked = true;
+  }
   renderRows();
   render();
 
@@ -209,6 +234,7 @@
     sel.forEach((k, i) => {
       const c = calcStay(k, nights);
       lines.push('', `${i + 1}. ${c.r.label}${c.r.single ? '' : ` x${c.units}`}`);
+      if (k === 'staanplek' && c.s.stands.length) lines.push(`   Staanplek nommers (voorkeur): ${standList().join(', ')}`);
       if (k === 'lapa') lines.push(`   Dae: ${num(c.s.days, 1)}`);
       lines.push(`   Volwassenes: ${num(c.s.adults)}, kinders 3+: ${num(c.s.kids)}`);
       if (c.r.vehicles && num(c.s.vehicles)) lines.push(`   Ekstra voertuie: ${num(c.s.vehicles)}`);

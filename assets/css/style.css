@@ -670,3 +670,38 @@ a.stay-media { display: block; color: inherit; }
 .sum-lines b { white-space: nowrap; }
 .sum-lines .sum-empty { color: rgba(241, 238, 228, .6); }
 @media (max-width: 600px) { .picks { grid-template-columns: 1fr; } .stay-row-fields { grid-template-columns: 1fr 1fr; } }
+
+/* Numbered stand picker (staanplekke page) */
+.stands-section { padding-top: 0; }
+.stands-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); }
+.stand { border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; transition: border-color .3s, box-shadow .3s; }
+.stand.is-picked { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 45%, transparent); }
+.stand-media { aspect-ratio: 4 / 3; overflow: hidden; }
+.stand-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.stand:hover .stand-media img { transform: scale(1.05); }
+.stand-body { padding: 14px 16px 16px; display: grid; gap: 6px; flex: 1; align-content: start; }
+.stand-body h3 { font-size: 1.2rem; }
+.stand-body small { color: var(--muted); font-size: .84rem; }
+.stand-actions { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.stand-actions .btn { --h: 40px; padding: 0 16px; }
+.stand-pick { height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-strong); background: transparent; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: .9rem; cursor: pointer; transition: background-color .25s, border-color .25s, color .25s; }
+.stand-pick .icon { width: 16px; height: 16px; }
+.stand-pick:hover { border-color: var(--ink); }
+.stand-pick[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.stand-bar { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 35; display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 20px; border-radius: 999px; background: var(--forest); color: var(--bone); box-shadow: 0 20px 50px -18px rgba(0, 0, 0, .6); max-width: calc(100vw - 32px); animation: rowIn .4s var(--ease); }
+.stand-bar[hidden] { display: none; }
+.stand-bar span { font-weight: 500; font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.stand-bar .btn-ghost { color: var(--bone); border-color: rgba(241, 238, 228, .3); }
+body:has(.stand-bar:not([hidden])) .wa-float { transform: translateY(120px); }
+@media (max-width: 1080px) { .stands-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .stands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stand-bar { left: 16px; right: 16px; transform: none; border-radius: var(--r); flex-wrap: wrap; padding: 12px; } .stand-bar span { flex: 1 1 100%; white-space: normal; } .stand-bar .btn { flex: 1; } }
+@media (max-width: 420px) { .stand-actions .btn, .stand-pick { flex: 1; justify-content: center; } }
+
+/* Stand number chips in the booking form */
+.stand-chips-wrap { display: grid; gap: 8px; }
+.stand-chips-label { font-weight: 700; font-size: .93rem; }
+.stand-chips-label .hint a { color: inherit; text-underline-offset: 3px; }
+.stand-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: 6px; }
+.stand-chip { height: 40px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--surface); font-weight: 700; font-size: .92rem; cursor: pointer; transition: background-color .2s, border-color .2s, color .2s; }
+.stand-chip:hover { border-color: var(--ink); }
+.stand-chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
